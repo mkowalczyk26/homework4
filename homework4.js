@@ -17,7 +17,9 @@ Object.defineProperty(person, 'updateInfo', {
     value: function(info) {
         Object.keys(info).forEach(prop => {
             if (this.hasOwnProperty(prop)) {
-            this[prop] = info[prop]
+            Object.defineProperty(person, prop, {
+                value: info[prop]
+            })
             }
         })
     }
@@ -30,12 +32,10 @@ Object.defineProperty(person, 'address', {
     configurable: false
 })
 
-console.log(person.firstName)
-person.firstName = "Bob"
-console.log(person.firstName)
-
-person.updateInfo({ firstName: "Bob", age: 32 })
-console.log(person.firstName)
+console.log(person)
+person.updateInfo({ firstName: "Jane", age: 32 })
+person.age = 40
+console.log(person)
 console.log()
 
 
